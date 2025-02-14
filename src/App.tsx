@@ -9,6 +9,12 @@ function App() {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+
 
 
   return (
