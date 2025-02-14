@@ -17,8 +17,8 @@ interface Todo {
 interface AuthTodoState {
   user: UserData | null;
   token: string | null;
-  todos: Todo[]; // All todos from the backend
-  userTodos: Todo[]; // Todos specific to the logged-in user
+  todos: Todo[]; 
+  userTodos: Todo[]; 
 }
 
 const initialState: AuthTodoState = {

@@ -37,11 +37,12 @@ export default function SignupPage() {
   const submit = (values: FormValues) => {
     postRegister(values)
       .then((response: any) => {
-        if (response.status === 200) {
-          navigate('/otp');
+        if (response.status === 201) {
+          localStorage.setItem("userEmail", values.email); 
+          navigate("/otp");
           toast.success(response.data.message);
         } else {
-          toast.error(response.message);
+          toast.error(response.data.message);
         }
       })
       .catch((error: Error) => {
@@ -49,6 +50,12 @@ export default function SignupPage() {
         toast.error("Something went wrong. Please try again.");
       });
   };
+  
+  useEffect(() => {
+    if (user) {
+      navigate('/home');
+    }
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-[#282d49] text-white flex justify-center items-center">

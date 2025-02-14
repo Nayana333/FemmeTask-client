@@ -18,8 +18,7 @@ export default function LoginPage() {
     postLogin(values)
       .then((response: any) => {
         const data = response.data;
-        console.log(data);
-        
+        console.log(data);       
         if (response.status === 200) {
           toast.success(data.message);
           dispatch(logged({ user: data, token: data.token })); 
@@ -34,11 +33,11 @@ export default function LoginPage() {
       });
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate('/home');
-  //   }
-  // }, [user, navigate]);
+  useEffect(() => {
+    if (user) {
+      navigate('/home');
+    }
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-[#282d49] text-white flex justify-center items-center">
