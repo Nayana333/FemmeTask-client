@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components/ui/button";
 import { validationSchema } from "../../utils/validation/TodoValidation";
 import { toast } from "sonner";
-import { postTodo, deleteTodoApi } from "../../services/api/user/apiMethods";
+import { postTodo, deleteTodoApi, markTodoCompletedApi } from "../../services/api/user/apiMethods";
 import { setUserTodos } from "../../utils/context/reducers/authSlice";
-import { log } from "node:console";
 
 interface Todo {
   _id: string;
@@ -74,8 +73,6 @@ export default function HomePage() {
 
     deleteTodoApi(todoId, accessToken)
       .then((response: any) => {
-        console.log(response);
-        
         if (response.status === 200) {
           const updatedTodos = response.data.todos;          
           dispatch(setUserTodos({ userTodos: updatedTodos }));
@@ -90,7 +87,27 @@ export default function HomePage() {
       });
   };
 
- 
+  const markAsCompleted = (todoId: string) => {
+    if (!userId) {
+      setError("User ID is required. Please log in again.");
+      return;
+    }
+
+    markTodoCompletedApi(todoId)
+      .then((response: any) => {
+        if (response.status === 200) {
+          const updatedTodos = response.data.todos;
+          dispatch(setUserTodos({ userTodos: updatedTodos }));
+          toast.success(response.data.message);
+        } else {
+          toast.error(response.data.message);
+        }
+      })
+      .catch((error: Error) => {
+        console.log(error?.message);
+        toast.error("Something went wrong. Please try again.");
+      });
+  };
 
   return (
     <div className="min-h-screen bg-[#282d49] text-white p-8 flex justify-center">
@@ -128,11 +145,14 @@ export default function HomePage() {
               className="flex items-center justify-between bg-[#3f4668] p-3 rounded-md mb-2"
             >
               <div className="flex items-center">
-                <button className="mr-2 text-lg">
+                <button
+                  className="mr-2 text-lg"
+                  onClick={() => markAsCompleted(todo._id)}
+                >
                   {todo.completed ? (
                     <CheckCircle className="text-green-400" />
                   ) : (
-                    <Circle className="text-gray-400" />
+                    <Circle className="text-gray-400 hover:text-green-400" />
                   )}
                 </button>
                 <span

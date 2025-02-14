@@ -110,6 +110,24 @@ export const postLogin = (userData:{email:string,password:string}) => {
     }
   };
 
+
+  export const markTodoCompletedApi= (todoId: string) => { 
+    return new Promise((resolve, reject) => {
+      try {
+        console.log(todoId);
+
+        apiCalls("patch", `${todoUrls.markAsCompleted}/${todoId}`, {}) 
+        
+          .then((response) => resolve(response))
+          .catch((err) => reject(err));
+      } catch (error) {
+        resolve({ status: 500, message: "Something went wrong" });
+      }
+    });
+  };
+
+
+  
   
   
   

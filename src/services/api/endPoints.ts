@@ -11,5 +11,6 @@ export const todoUrls={
 
     addTodo:'/todos/addTodo',
     deleteTodo:'/todos/deleteTodo',
-    getTodo:'/todos/getTodo'
+    getTodo:'/todos/getTodo',
+    markAsCompleted:'/todos/markAsCompleted',
 }
