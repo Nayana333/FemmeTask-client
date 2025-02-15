@@ -8,6 +8,8 @@ import Protect from "./protect/Protect";
 import ErrorPage from "../pages/user/Error";
 import NotAuthorized from "../pages/user/notAuthorized";
 import App from "../App";
+import SuccessPage from "../pages/user/Success";
+
 
 const appRouter = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/notAuthorized",
     element: <NotAuthorized />,
+  },
+  {
+    path: "/success",
+    element: <SuccessPage/>,
   },
   {
     path: "/home",

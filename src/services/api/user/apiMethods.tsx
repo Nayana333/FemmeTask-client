@@ -101,15 +101,16 @@ export const postLogin = (userData:{email:string,password:string}) => {
     });
   };
   
-  export const getAllTodo = async ( userId:string) => { 
+  export const getAllTodo = async (userId: string): Promise<any> => { 
     try {
-      const response = await apiCalls("get", `${todoUrls.getTodo}/${userId}`, {}) 
-      return response;
+      const response = await apiCalls("get", `${todoUrls.getTodo}/${userId}`, {});
+      
+      return response as any; 
     } catch (error) {
       return { status: 500, message: "Something went wrong" };
     }
   };
-
+  
 
   export const markTodoCompletedApi= (todoId: string) => { 
     return new Promise((resolve, reject) => {

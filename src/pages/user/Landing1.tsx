@@ -1,8 +1,9 @@
-"use client"
 
 import { motion } from "framer-motion"
 import { CheckCircle } from "lucide-react"
 import { Button } from "../../components/ui/button"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 const features = [
   "Efficient task management",
@@ -12,7 +13,23 @@ const features = [
   "Cross-platform sync",
 ]
 
+
+
+
 export default function LandingPage() {
+  const navigate=useNavigate()
+
+  const handleNavigation = () => {
+    if (user) {
+      navigate("/home");
+    } else {
+      navigate("/login");
+    }
+  };
+
+
+  const selectUser = (state: any) => state.auth.user?.user;
+  const user = useSelector(selectUser);
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-600 to-blue-500 text-white">
       {/* Animated background */}
@@ -25,7 +42,7 @@ export default function LandingPage() {
       <div className="relative z-10 container mx-auto px-6 py-20">
         <nav className="flex justify-between items-center mb-12">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-            <h1 className="text-3xl font-extrabold">TaskMaster</h1>
+            <h1 className="text-3xl font-extrabold text-[#f4a261]">FemmeTask</h1>
           </motion.div>
           <motion.div
             className="flex space-x-5"
@@ -90,9 +107,13 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <Button variant="outline" className="bg-gray-800 text-white border-gray-700 hover:bg-gray-700">
-              Start Now
-            </Button>
+      <Button 
+  variant="outline" 
+  className="bg-gray-800 text-white border-gray-700 hover:bg-gray-700"
+  onClick={handleNavigation}
+>
+  Start Now
+</Button>
             <Button className="bg-blue-600 text-white hover:bg-blue-700">Learn More</Button>
           </motion.div>
         </main>

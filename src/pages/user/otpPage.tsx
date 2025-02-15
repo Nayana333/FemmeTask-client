@@ -69,11 +69,11 @@ export default function OTPPage() {
       return;
     }
 
-    postOtp(storedEmail, otpString) // ✅ Now sending both email & OTP separately
+    postOtp(storedEmail, otpString) 
       .then((response: any) => {
         if (response.status === 200) {
           toast.success("OTP Verified Successfully");
-          localStorage.removeItem("userEmail"); // ✅ Clear local storage after verification
+          localStorage.removeItem("userEmail");
           navigate("/success");
         } else {
           toast.error(response.data.message);

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components/ui/button";
 import { validationSchema } from "../../utils/validation/TodoValidation";
 import { toast } from "sonner";
-import { postTodo, deleteTodoApi, markTodoCompletedApi, editTodoApi } from "../../services/api/user/apiMethods";
+import { postTodo, deleteTodoApi, markTodoCompletedApi, editTodoApi,getAllTodo } from "../../services/api/user/apiMethods";
 import { setUserTodos,logout } from "../../utils/context/reducers/authSlice";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
@@ -27,7 +27,7 @@ export default function HomePage() {
 
   const [userId, setUserId] = useState<string>("");
   const [title, setTitle] = useState("");
-  const [error, setError] = useState("");
+  const [error,setError] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editedTitle, setEditedTitle] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -40,9 +40,16 @@ export default function HomePage() {
 
 
   useEffect(() => {
-    if (user?.todos) {
-      dispatch(setUserTodos({ userTodos: user.todos }));
-    }
+    const fetchTodos = async () => {
+      if (user?.id) {
+        const response = await getAllTodo(user.id);
+        if (response.status === 200) {
+          dispatch(setUserTodos({ userTodos: response.data }));
+        }
+      }
+    };
+
+    fetchTodos();
   }, [user, dispatch]);
 
 //for clock settings

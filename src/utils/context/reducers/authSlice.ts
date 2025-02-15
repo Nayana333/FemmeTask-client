@@ -56,27 +56,9 @@ const authTodoSlice = createSlice({
       state.userTodos = action.payload.userTodos;
     },
 
-    addTodo: (state, action: PayloadAction<{ todo: Todo }>) => {
-      state.todos.push(action.payload.todo);
-      state.userTodos.push(action.payload.todo);
-    },
-
-    updateTodo: (state, action: PayloadAction<{ updatedTodo: Todo }>) => {
-      state.todos = state.todos.map((todo) =>
-        todo.id === action.payload.updatedTodo.id ? action.payload.updatedTodo : todo
-      );
-      state.userTodos = state.userTodos.map((todo) =>
-        todo.id === action.payload.updatedTodo.id ? action.payload.updatedTodo : todo
-      );
-    },
-
-    deleteTodo: (state, action: PayloadAction<{ todoId: string }>) => {
-      state.todos = state.todos.filter((todo) => todo.id !== action.payload.todoId);
-      state.userTodos = state.userTodos.filter((todo) => todo.id !== action.payload.todoId);
-    },
   },
 });
 
-export const { logged, logout, updateUser, setTodos, setUserTodos, addTodo, updateTodo, deleteTodo } =
+export const { logged, logout, updateUser, setTodos, setUserTodos } =
   authTodoSlice.actions;
 export default authTodoSlice.reducer;

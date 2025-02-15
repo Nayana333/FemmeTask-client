@@ -1,8 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { postRegister } from '../../services/api/user/apiMethods';
 import { FormValues, validationSchema } from '../../utils/validation/signUpValidation';
 import { toast } from 'sonner';
@@ -19,7 +19,6 @@ export default function SignupPage() {
 
   const selectUser = (state: any) => state.auth.user?.user;
   const user = useSelector(selectUser);
-  const dispatch = useDispatch();
 
   const initialValues: FormValues = {
     userName: '',
