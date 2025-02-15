@@ -21,8 +21,8 @@ export default function LoginPage() {
         console.log(data);       
         if (response.status === 200) {
           toast.success(data.message);
-          dispatch(logged({ user: data, token: data.token })); 
-          localStorage.setItem('userToken', data.token);
+          dispatch(logged({ user: data, token: data.user.accessToken })); 
+          localStorage.setItem('userToken', data.user.accessToken);
           navigate('/home');
         } else {
           toast.error(response.message);
