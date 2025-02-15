@@ -23,7 +23,6 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.auth.user?.user);
   const todos = useSelector((state: any) => state.auth.userTodos) || [];
-  const accessToken = useSelector((state: any) => state.auth.user?.accessToken);
 
   const [userId, setUserId] = useState<string>("");
   const [title, setTitle] = useState("");
@@ -74,7 +73,7 @@ export default function HomePage() {
     validationSchema
       .validate({ title, completed: false, user: userId })
       .then(() => {
-        postTodo({ title, completed: false, user: userId }, accessToken)
+        postTodo({ title, completed: false, user: userId })
           .then((response: any) => {
             if (response.status === 201) {
               dispatch(setUserTodos({ userTodos: response.data.todo})); 
@@ -92,7 +91,7 @@ export default function HomePage() {
 
   //delete todo
   const deleteTodo = (todoId: string) => {
-    deleteTodoApi(todoId, accessToken)
+    deleteTodoApi(todoId)
       .then((response: any) => {
         if (response.status === 200) {
           dispatch(setUserTodos({ userTodos: response.data.todos }));

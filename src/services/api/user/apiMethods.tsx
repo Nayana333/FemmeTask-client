@@ -2,7 +2,6 @@ import { userUrls,todoUrls } from "../endPoints";
 import apiCalls from "./apiCalls";
 import { FormValues } from "../../../utils/validation/signUpValidation";
 import { TodoFormValues } from "../../../utils/validation/TodoValidation";
-import { todo } from "node:test";
 
 
 
@@ -76,7 +75,7 @@ export const postLogin = (userData:{email:string,password:string}) => {
     })
   }
 
-  export const postTodo = (todos: TodoFormValues, token: string) => {
+  export const postTodo = (todos: TodoFormValues, ) => {
     return new Promise((resolve, reject) => {
       try {
         apiCalls("post", todoUrls.addTodo, todos, ) 
@@ -89,7 +88,7 @@ export const postLogin = (userData:{email:string,password:string}) => {
   };
   
   
-  export const deleteTodoApi = (todoId: string, accessToken: string) => { 
+  export const deleteTodoApi = (todoId: string,) => { 
     return new Promise((resolve, reject) => {
       try {
         apiCalls("delete", `${todoUrls.deleteTodo}/${todoId}`, {}) 

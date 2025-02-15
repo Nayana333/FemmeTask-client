@@ -32,13 +32,11 @@ export default function LandingPage() {
   const user = useSelector(selectUser);
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-600 to-blue-500 text-white">
-      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         <div className="absolute inset-0 bg-gray-800 opacity-90"></div>
       </div>
 
-      {/* Content */}
       <div className="relative z-10 container mx-auto px-6 py-20">
         <nav className="flex justify-between items-center mb-12">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
