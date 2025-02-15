@@ -8,7 +8,7 @@ export default function NotAuthorized() {
         <h1 className="mt-4 text-4xl font-bold">401 - Not Authorized</h1>
         <p className="mt-2 text-lg">Sorry, you don't have permission to access this page.</p>
         <a
-          href="/"
+          href="/login"
           className="mt-6 inline-block rounded-lg bg-white px-4 py-2 text-[#282d49] font-semibold transition-colors hover:bg-gray-200"
         >
           Return to home

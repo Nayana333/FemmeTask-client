@@ -10,7 +10,7 @@ import { initialValues, validationSchema } from '../../utils/validation/loginVal
 import { postLogin } from '../../services/api/user/apiMethods';
 
 export default function LoginPage() {
-  const user = useSelector((state: any) => state.auth.user);
+  const user = useSelector((state: any) => state.auth.user?.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

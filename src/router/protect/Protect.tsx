@@ -1,24 +1,45 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
+
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import { logout } from "../../utils/context/reducers/authSlice";
 
 function Protect({ children }: any) {
   const navigate = useNavigate();
-  const selectUser = (state: any) => state.auth.user;
-  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  
+  const user = useSelector((state: any) => state.auth.user?.user);
+  const token = useSelector((state: any) => state.auth.user?.user?.accessToken);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    if (!user) {
-      alert('not auth user')
-      navigate('/notAuthorized');
+    if (!user || !token) {
+      setLoading(false);
+      navigate("/notAuthorized");
+      return;
     }
-  }, [user, navigate]);
 
-  if (user) {
-    return children;
-  }
+    try {
+      const decoded: any = jwtDecode(token);
+      if (decoded.exp * 1000 < Date.now()) {
+        dispatch(logout());
+        navigate("/login");
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Invalid token:", error);
+      dispatch(logout());
+      navigate("/login");
+      setLoading(false);
+    }
+  }, [user, token, navigate, dispatch]);
 
-  return null; 
+  if (loading) return <div>Loading...</div>; 
+
+  return user ? children : null;
 }
 
 export default Protect;

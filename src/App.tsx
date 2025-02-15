@@ -1,11 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { toast } from "sonner";
 
 
 function App() {
-  const selectUser = (state: any) => state.auth.user;
+  const selectUser = (state: any) => state.auth.user?.user;
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 

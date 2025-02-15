@@ -17,7 +17,7 @@ export default function SignupPage() {
 
   const navigate = useNavigate();
 
-  const selectUser = (state: any) => state.auth.user;
+  const selectUser = (state: any) => state.auth.user?.user;
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
