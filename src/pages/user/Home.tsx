@@ -26,7 +26,7 @@ export default function HomePage() {
 
   const [userId, setUserId] = useState<string>("");
   const [title, setTitle] = useState("");
-  const [error,setError] = useState("");
+  const [_error,setError] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editedTitle, setEditedTitle] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
