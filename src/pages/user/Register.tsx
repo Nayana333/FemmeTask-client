@@ -46,7 +46,7 @@ export default function SignupPage() {
       })
       .catch((error: Error) => {
         console.log(error?.message);
-        toast.error("Something went wrong. Please try again.");
+        toast.error("your registration is loading...");
       });
   };
   
